@@ -1,14 +1,16 @@
-package dev.harshal.productservice.models;
+package dev.harshal.productservice.dtos;
 
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
-public class Product extends BaseModel{
+public class ProductDto {
+    private long id;
     private String title;
+    private double price;
+    private String category;
     private String description;
     private String image;
-    private Category category;
-    private double price;
+
 }
