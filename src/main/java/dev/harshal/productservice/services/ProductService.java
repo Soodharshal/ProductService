@@ -8,4 +8,6 @@ import org.springframework.stereotype.Service;
 public interface ProductService {
 
     GenricProductDTO getProductById(Long id);
+
+    GenricProductDTO createProduct(GenricProductDTO productDTO);
 }

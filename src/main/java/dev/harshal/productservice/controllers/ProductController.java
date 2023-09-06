@@ -6,7 +6,9 @@ import dev.harshal.productservice.services.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
 
 @RestController
 @RequestMapping("/products")
@@ -14,6 +16,8 @@ public class ProductController {
     @Value("${productservice.type}")
     private String productServiceType;
 private ProductService productService;
+
+
 //    public ProductController(@Qualifier(productServiceType) ProductService productService){
 //        productService = productService;
 //    }
@@ -35,9 +39,9 @@ private ProductService productService;
 
     }
     @PostMapping()
-    public void createProduct(){
-
-    }
+    public GenricProductDTO createProduct(@RequestBody GenricProductDTO productDTO){
+        return productService.createProduct(productDTO);
+      }
     @PutMapping("{id}")
     public void updateProductbyId(){
 

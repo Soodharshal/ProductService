@@ -10,4 +10,9 @@ public class SelfStoreProductService implements ProductService{
     public GenricProductDTO getProductById(Long id) {
         return new GenricProductDTO();
     }
+
+    @Override
+    public GenricProductDTO createProduct(GenricProductDTO productDTO) {
+        return null;
+    }
 }
