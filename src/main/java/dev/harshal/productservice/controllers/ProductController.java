@@ -10,6 +10,8 @@ import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/products")
 public class ProductController {
@@ -25,13 +27,11 @@ private ProductService productService;
         this.productService = productService;
     }
     @GetMapping()
-    public void getAllProducts(){
-
+    public List<GenricProductDTO> getAllProducts(){
+        return productService.getProducts();
     }
     @GetMapping("{id}")
     public GenricProductDTO getProductById(@PathVariable("id") Long id){
-//        System.out.println("Inside getProductById method");
-//        return "Here is product " + id;
         return productService.getProductById(id);
     }
     @DeleteMapping("{id}")
@@ -43,7 +43,7 @@ private ProductService productService;
         return productService.createProduct(productDTO);
       }
     @PutMapping("{id}")
-    public void updateProductbyId(){
-
+    public void updateProductbyId(@RequestBody GenricProductDTO productDTO){
+//         productService.updateProductbyId(id);
     }
 }
