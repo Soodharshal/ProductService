@@ -22,4 +22,8 @@ public class SelfStoreProductService implements ProductService{
     public GenricProductDTO createProduct(GenricProductDTO productDTO) {
         return null;
     }
+    @Override
+    public GenricProductDTO deleteProductById(Long id) {
+        return null;
+    }
 }

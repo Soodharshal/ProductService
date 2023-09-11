@@ -1,12 +1,16 @@
 package dev.harshal.productservice.controllers;
 
+import dev.harshal.productservice.dtos.ExceptionDTO;
 import dev.harshal.productservice.dtos.GenricProductDTO;
+import dev.harshal.productservice.exceptions.NotFoundException;
 import dev.harshal.productservice.models.Product;
 import dev.harshal.productservice.services.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.web.client.RestTemplateBuilder;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
@@ -31,12 +35,15 @@ private ProductService productService;
         return productService.getProducts();
     }
     @GetMapping("{id}")
-    public GenricProductDTO getProductById(@PathVariable("id") Long id){
-        return productService.getProductById(id);
+    public ResponseEntity<GenricProductDTO> getProductById(@PathVariable("id") Long id) throws NotFoundException {
+      GenricProductDTO product = productService.getProductById(id);
+
+        ResponseEntity<GenricProductDTO> response = new ResponseEntity<>(product, HttpStatus.OK);
+        return response;
     }
     @DeleteMapping("{id}")
-    public void deleteProductById(){
-
+    public GenricProductDTO deleteProductById(@PathVariable("id") Long id){
+        return productService.deleteProductById(id);
     }
     @PostMapping()
     public GenricProductDTO createProduct(@RequestBody GenricProductDTO productDTO){
@@ -46,4 +53,6 @@ private ProductService productService;
     public void updateProductbyId(@RequestBody GenricProductDTO productDTO){
 //         productService.updateProductbyId(id);
     }
+
+
 }
